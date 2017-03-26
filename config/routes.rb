@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root to: 'pages#home'
 
   get "about", to: "pages#about"
@@ -8,7 +9,9 @@ Rails.application.routes.draw do
 
   get "blog", to: redirect("http://google.com")
 
-  resources :projects
+  resources :projects do
+      resources :tasks, except: [:index], controller: 'projects/tasks'
+  end
 
   get "*path", to: redirect("/error")
 end
